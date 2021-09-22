@@ -4,6 +4,10 @@ title: Blog
 permalink: /Blog
 ---
 
+---
+
+---
+
 # Detecting Atrial Fibrilation with 1-D CNNs
 
 So I recently bought an Apple Watch. It was on sale for a pretty good deal and I’ve been wanting one for quite a while, so I just had to get it. Like I normally do with all of my recently purchased gadgets, I played around with it in the middle of the night to figure out all of its features. This led to me discovering the ECG feature which intrigued me, so I set out to recreate a similar system to detect Atrial Fibrillation (AFib) like Apple’s implementation does. 

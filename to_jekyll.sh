@@ -1,1 +1,1 @@
-jupyter nbconvert Blog.ipynb -to jekyll --no-input
+jupyter nbconvert Blog.ipynb --to jekyll --no-input
