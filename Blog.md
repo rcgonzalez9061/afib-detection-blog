@@ -1,11 +1,7 @@
 ---
 layout: page
-title: Blog
-permalink: /Blog
----
-
----
-
+title: AFib Detection
+permalink: /
 ---
 
 # Detecting Atrial Fibrilation with 1-D CNNs
