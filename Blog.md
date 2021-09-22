@@ -18,7 +18,7 @@ The first thing I had to do was to source a good ECG dataset. Luckily, I quickly
 
 
 <style>
-#data_overview {
+#data-overview {
     margin: auto !important;
     display: flex;
     justify-content: center;
@@ -26,43 +26,43 @@ The first thing I had to do was to source a good ECG dataset. Luckily, I quickly
 </style>
 
 
-<div id='data_overview'><style  type="text/css" >
-</style><table id="T_b1024_" ><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Total Duration<br>(Minutes)</th>        <th class="col_heading level0 col1" >Total<br>Duration (%)</th>        <th class="col_heading level0 col2" >Unique<br>Occasions</th>        <th class="col_heading level0 col3" >Min<br>Duration</th>        <th class="col_heading level0 col4" >Avg Duration<br>(Samples)</th>        <th class="col_heading level0 col5" >Long Samples<br>(>30s)</th>    </tr>    <tr>        <th class="index_name level0" >Label</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+<div id='#data-overview'><style  type="text/css" >
+</style><table id="T_6a04d_" ><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Total Duration<br>(Minutes)</th>        <th class="col_heading level0 col1" >Total<br>Duration (%)</th>        <th class="col_heading level0 col2" >Unique<br>Occasions</th>        <th class="col_heading level0 col3" >Min<br>Duration</th>        <th class="col_heading level0 col4" >Avg Duration<br>(Samples)</th>        <th class="col_heading level0 col5" >Long Samples<br>(>30s)</th>    </tr>    <tr>        <th class="index_name level0" >Label</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_b1024_level0_row0" class="row_heading level0 row0" >AFIB</th>
-                        <td id="T_b1024_row0_col0" class="data row0 col0" >5,603.85</td>
-                        <td id="T_b1024_row0_col1" class="data row0 col1" >39.87%</td>
-                        <td id="T_b1024_row0_col2" class="data row0 col2" >291</td>
-                        <td id="T_b1024_row0_col3" class="data row0 col3" >420</td>
-                        <td id="T_b1024_row0_col4" class="data row0 col4" >288,858</td>
-                        <td id="T_b1024_row0_col5" class="data row0 col5" >226</td>
+                        <th id="T_6a04d_level0_row0" class="row_heading level0 row0" >AFIB</th>
+                        <td id="T_6a04d_row0_col0" class="data row0 col0" >5,603.85</td>
+                        <td id="T_6a04d_row0_col1" class="data row0 col1" >39.87%</td>
+                        <td id="T_6a04d_row0_col2" class="data row0 col2" >291</td>
+                        <td id="T_6a04d_row0_col3" class="data row0 col3" >420</td>
+                        <td id="T_6a04d_row0_col4" class="data row0 col4" >288,858</td>
+                        <td id="T_6a04d_row0_col5" class="data row0 col5" >226</td>
             </tr>
             <tr>
-                        <th id="T_b1024_level0_row1" class="row_heading level0 row1" >AFL</th>
-                        <td id="T_b1024_row1_col0" class="data row1 col0" >97.95</td>
-                        <td id="T_b1024_row1_col1" class="data row1 col1" >0.70%</td>
-                        <td id="T_b1024_row1_col2" class="data row1 col2" >14</td>
-                        <td id="T_b1024_row1_col3" class="data row1 col3" >882</td>
-                        <td id="T_b1024_row1_col4" class="data row1 col4" >104,947</td>
-                        <td id="T_b1024_row1_col5" class="data row1 col5" >7</td>
+                        <th id="T_6a04d_level0_row1" class="row_heading level0 row1" >AFL</th>
+                        <td id="T_6a04d_row1_col0" class="data row1 col0" >97.95</td>
+                        <td id="T_6a04d_row1_col1" class="data row1 col1" >0.70%</td>
+                        <td id="T_6a04d_row1_col2" class="data row1 col2" >14</td>
+                        <td id="T_6a04d_row1_col3" class="data row1 col3" >882</td>
+                        <td id="T_6a04d_row1_col4" class="data row1 col4" >104,947</td>
+                        <td id="T_6a04d_row1_col5" class="data row1 col5" >7</td>
             </tr>
             <tr>
-                        <th id="T_b1024_level0_row2" class="row_heading level0 row2" >J</th>
-                        <td id="T_b1024_row2_col0" class="data row2 col0" >5.52</td>
-                        <td id="T_b1024_row2_col1" class="data row2 col1" >0.04%</td>
-                        <td id="T_b1024_row2_col2" class="data row2 col2" >12</td>
-                        <td id="T_b1024_row2_col3" class="data row2 col3" >380</td>
-                        <td id="T_b1024_row2_col4" class="data row2 col4" >6,894</td>
-                        <td id="T_b1024_row2_col5" class="data row2 col5" >3</td>
+                        <th id="T_6a04d_level0_row2" class="row_heading level0 row2" >J</th>
+                        <td id="T_6a04d_row2_col0" class="data row2 col0" >5.52</td>
+                        <td id="T_6a04d_row2_col1" class="data row2 col1" >0.04%</td>
+                        <td id="T_6a04d_row2_col2" class="data row2 col2" >12</td>
+                        <td id="T_6a04d_row2_col3" class="data row2 col3" >380</td>
+                        <td id="T_6a04d_row2_col4" class="data row2 col4" >6,894</td>
+                        <td id="T_6a04d_row2_col5" class="data row2 col5" >3</td>
             </tr>
             <tr>
-                        <th id="T_b1024_level0_row3" class="row_heading level0 row3" >N</th>
-                        <td id="T_b1024_row3_col0" class="data row3 col0" >8,349.30</td>
-                        <td id="T_b1024_row3_col1" class="data row3 col1" >59.40%</td>
-                        <td id="T_b1024_row3_col2" class="data row3 col2" >288</td>
-                        <td id="T_b1024_row3_col3" class="data row3 col3" >1062</td>
-                        <td id="T_b1024_row3_col4" class="data row3 col4" >434,859</td>
-                        <td id="T_b1024_row3_col5" class="data row3 col5" >263</td>
+                        <th id="T_6a04d_level0_row3" class="row_heading level0 row3" >N</th>
+                        <td id="T_6a04d_row3_col0" class="data row3 col0" >8,349.30</td>
+                        <td id="T_6a04d_row3_col1" class="data row3 col1" >59.40%</td>
+                        <td id="T_6a04d_row3_col2" class="data row3 col2" >288</td>
+                        <td id="T_6a04d_row3_col3" class="data row3 col3" >1062</td>
+                        <td id="T_6a04d_row3_col4" class="data row3 col4" >434,859</td>
+                        <td id="T_6a04d_row3_col5" class="data row3 col5" >263</td>
             </tr>
     </tbody></table></div>
 
@@ -144,7 +144,7 @@ Lastly, I grouped each fold by architecture into ensembles by averaging their ou
     text-align: center !important;
 }
 
-#ind_model_perf {
+#ind-model-perf {
     margin: auto !important;
     display: flex;
     justify-content: center;
@@ -152,97 +152,97 @@ Lastly, I grouped each fold by architecture into ensembles by averaging their ou
 </style>
 
 
-<div id='ind_model_perf'><style  type="text/css" >
-</style><table id="T_d355d_" ><caption>Individual Model Performance</caption><thead>    <tr>        <th class="index_name level0" >Model</th>        <th class="col_heading level0 col0" colspan="3">Custom</th>        <th class="col_heading level0 col3" colspan="3">Hsieh</th>        <th class="col_heading level0 col6" colspan="3">MobileNetV2</th>    </tr>    <tr>        <th class="blank level1" ></th>        <th class="col_heading level1 col0" >AUC</th>        <th class="col_heading level1 col1" >Accuracy</th>        <th class="col_heading level1 col2" >F1 Score</th>        <th class="col_heading level1 col3" >AUC</th>        <th class="col_heading level1 col4" >Accuracy</th>        <th class="col_heading level1 col5" >F1 Score</th>        <th class="col_heading level1 col6" >AUC</th>        <th class="col_heading level1 col7" >Accuracy</th>        <th class="col_heading level1 col8" >F1 Score</th>    </tr>    <tr>        <th class="index_name level0" >Fold</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+<div id='ind-model-perf'><style  type="text/css" >
+</style><table id="T_e0acb_" ><caption>Individual Model Performance</caption><thead>    <tr>        <th class="index_name level0" >Model</th>        <th class="col_heading level0 col0" colspan="3">Custom</th>        <th class="col_heading level0 col3" colspan="3">Hsieh</th>        <th class="col_heading level0 col6" colspan="3">MobileNetV2</th>    </tr>    <tr>        <th class="blank level1" ></th>        <th class="col_heading level1 col0" >AUC</th>        <th class="col_heading level1 col1" >Accuracy</th>        <th class="col_heading level1 col2" >F1 Score</th>        <th class="col_heading level1 col3" >AUC</th>        <th class="col_heading level1 col4" >Accuracy</th>        <th class="col_heading level1 col5" >F1 Score</th>        <th class="col_heading level1 col6" >AUC</th>        <th class="col_heading level1 col7" >Accuracy</th>        <th class="col_heading level1 col8" >F1 Score</th>    </tr>    <tr>        <th class="index_name level0" >Fold</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_d355d_level0_row0" class="row_heading level0 row0" >1</th>
-                        <td id="T_d355d_row0_col0" class="data row0 col0" >0.9981</td>
-                        <td id="T_d355d_row0_col1" class="data row0 col1" >0.9884</td>
-                        <td id="T_d355d_row0_col2" class="data row0 col2" >0.9855</td>
-                        <td id="T_d355d_row0_col3" class="data row0 col3" >0.9993</td>
-                        <td id="T_d355d_row0_col4" class="data row0 col4" >0.9929</td>
-                        <td id="T_d355d_row0_col5" class="data row0 col5" >0.9911</td>
-                        <td id="T_d355d_row0_col6" class="data row0 col6" >0.9994</td>
-                        <td id="T_d355d_row0_col7" class="data row0 col7" >0.9925</td>
-                        <td id="T_d355d_row0_col8" class="data row0 col8" >0.9907</td>
+                        <th id="T_e0acb_level0_row0" class="row_heading level0 row0" >1</th>
+                        <td id="T_e0acb_row0_col0" class="data row0 col0" >0.9981</td>
+                        <td id="T_e0acb_row0_col1" class="data row0 col1" >0.9884</td>
+                        <td id="T_e0acb_row0_col2" class="data row0 col2" >0.9855</td>
+                        <td id="T_e0acb_row0_col3" class="data row0 col3" >0.9993</td>
+                        <td id="T_e0acb_row0_col4" class="data row0 col4" >0.9929</td>
+                        <td id="T_e0acb_row0_col5" class="data row0 col5" >0.9911</td>
+                        <td id="T_e0acb_row0_col6" class="data row0 col6" >0.9994</td>
+                        <td id="T_e0acb_row0_col7" class="data row0 col7" >0.9925</td>
+                        <td id="T_e0acb_row0_col8" class="data row0 col8" >0.9907</td>
             </tr>
             <tr>
-                        <th id="T_d355d_level0_row1" class="row_heading level0 row1" >2</th>
-                        <td id="T_d355d_row1_col0" class="data row1 col0" >0.9995</td>
-                        <td id="T_d355d_row1_col1" class="data row1 col1" >0.9940</td>
-                        <td id="T_d355d_row1_col2" class="data row1 col2" >0.9925</td>
-                        <td id="T_d355d_row1_col3" class="data row1 col3" >0.9995</td>
-                        <td id="T_d355d_row1_col4" class="data row1 col4" >0.9943</td>
-                        <td id="T_d355d_row1_col5" class="data row1 col5" >0.9928</td>
-                        <td id="T_d355d_row1_col6" class="data row1 col6" >0.9994</td>
-                        <td id="T_d355d_row1_col7" class="data row1 col7" >0.9938</td>
-                        <td id="T_d355d_row1_col8" class="data row1 col8" >0.9922</td>
+                        <th id="T_e0acb_level0_row1" class="row_heading level0 row1" >2</th>
+                        <td id="T_e0acb_row1_col0" class="data row1 col0" >0.9995</td>
+                        <td id="T_e0acb_row1_col1" class="data row1 col1" >0.9940</td>
+                        <td id="T_e0acb_row1_col2" class="data row1 col2" >0.9925</td>
+                        <td id="T_e0acb_row1_col3" class="data row1 col3" >0.9995</td>
+                        <td id="T_e0acb_row1_col4" class="data row1 col4" >0.9943</td>
+                        <td id="T_e0acb_row1_col5" class="data row1 col5" >0.9928</td>
+                        <td id="T_e0acb_row1_col6" class="data row1 col6" >0.9994</td>
+                        <td id="T_e0acb_row1_col7" class="data row1 col7" >0.9938</td>
+                        <td id="T_e0acb_row1_col8" class="data row1 col8" >0.9922</td>
             </tr>
             <tr>
-                        <th id="T_d355d_level0_row2" class="row_heading level0 row2" >3</th>
-                        <td id="T_d355d_row2_col0" class="data row2 col0" >0.9997</td>
-                        <td id="T_d355d_row2_col1" class="data row2 col1" >0.9951</td>
-                        <td id="T_d355d_row2_col2" class="data row2 col2" >0.9939</td>
-                        <td id="T_d355d_row2_col3" class="data row2 col3" >0.9992</td>
-                        <td id="T_d355d_row2_col4" class="data row2 col4" >0.9857</td>
-                        <td id="T_d355d_row2_col5" class="data row2 col5" >0.9823</td>
-                        <td id="T_d355d_row2_col6" class="data row2 col6" >0.9996</td>
-                        <td id="T_d355d_row2_col7" class="data row2 col7" >0.9850</td>
-                        <td id="T_d355d_row2_col8" class="data row2 col8" >0.9815</td>
+                        <th id="T_e0acb_level0_row2" class="row_heading level0 row2" >3</th>
+                        <td id="T_e0acb_row2_col0" class="data row2 col0" >0.9997</td>
+                        <td id="T_e0acb_row2_col1" class="data row2 col1" >0.9951</td>
+                        <td id="T_e0acb_row2_col2" class="data row2 col2" >0.9939</td>
+                        <td id="T_e0acb_row2_col3" class="data row2 col3" >0.9992</td>
+                        <td id="T_e0acb_row2_col4" class="data row2 col4" >0.9857</td>
+                        <td id="T_e0acb_row2_col5" class="data row2 col5" >0.9823</td>
+                        <td id="T_e0acb_row2_col6" class="data row2 col6" >0.9996</td>
+                        <td id="T_e0acb_row2_col7" class="data row2 col7" >0.9850</td>
+                        <td id="T_e0acb_row2_col8" class="data row2 col8" >0.9815</td>
             </tr>
     </tbody></table></div>
 
 
-    <style>
-    #perf_table_wrap {
-        display: flex !important;
-        justify-content: center;
-        margin: auto !important;
-        align-items: center !important;
-        padding: 10px;
-    }
-    </style>
+<style>
+#perf-table-wrap {
+    display: flex !important;
+    justify-content: center;
+    margin: auto !important;
+    align-items: center !important;
+    padding: 10px;
+}
+</style>
 
-    <div id='perf_table_wrap'>
-    <style  type="text/css" >
-</style><table id="T_fc1c5_" style='margin:10px !important;'><caption>Averaged Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+<div id='perf-table-wrap'>
+<style  type="text/css" >
+</style><table id="T_94615_" style='margin:10px !important;'><caption>Averaged Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_fc1c5_level0_row0" class="row_heading level0 row0" >Custom</th>
-                        <td id="T_fc1c5_row0_col0" class="data row0 col0" >0.9925</td>
-                        <td id="T_fc1c5_row0_col1" class="data row0 col1" >0.9907</td>
-                        <td id="T_fc1c5_row0_col2" class="data row0 col2" >0.9991</td>
+                        <th id="T_94615_level0_row0" class="row_heading level0 row0" >Custom</th>
+                        <td id="T_94615_row0_col0" class="data row0 col0" >0.9925</td>
+                        <td id="T_94615_row0_col1" class="data row0 col1" >0.9907</td>
+                        <td id="T_94615_row0_col2" class="data row0 col2" >0.9991</td>
             </tr>
             <tr>
-                        <th id="T_fc1c5_level0_row1" class="row_heading level0 row1" >Hsieh</th>
-                        <td id="T_fc1c5_row1_col0" class="data row1 col0" >0.9910</td>
-                        <td id="T_fc1c5_row1_col1" class="data row1 col1" >0.9888</td>
-                        <td id="T_fc1c5_row1_col2" class="data row1 col2" >0.9993</td>
+                        <th id="T_94615_level0_row1" class="row_heading level0 row1" >Hsieh</th>
+                        <td id="T_94615_row1_col0" class="data row1 col0" >0.9910</td>
+                        <td id="T_94615_row1_col1" class="data row1 col1" >0.9888</td>
+                        <td id="T_94615_row1_col2" class="data row1 col2" >0.9993</td>
             </tr>
             <tr>
-                        <th id="T_fc1c5_level0_row2" class="row_heading level0 row2" >MobileNetV2</th>
-                        <td id="T_fc1c5_row2_col0" class="data row2 col0" >0.9904</td>
-                        <td id="T_fc1c5_row2_col1" class="data row2 col1" >0.9881</td>
-                        <td id="T_fc1c5_row2_col2" class="data row2 col2" >0.9994</td>
+                        <th id="T_94615_level0_row2" class="row_heading level0 row2" >MobileNetV2</th>
+                        <td id="T_94615_row2_col0" class="data row2 col0" >0.9904</td>
+                        <td id="T_94615_row2_col1" class="data row2 col1" >0.9881</td>
+                        <td id="T_94615_row2_col2" class="data row2 col2" >0.9994</td>
             </tr>
     </tbody></table><style  type="text/css" >
-</style><table id="T_c729b_" style='margin:10px; !important;'><caption>Averaged Ensemble Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+</style><table id="T_6e297_" style='margin:10px; !important;'><caption>Averaged Ensemble Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_c729b_level0_row0" class="row_heading level0 row0" >Custom</th>
-                        <td id="T_c729b_row0_col0" class="data row0 col0" >0.9938</td>
-                        <td id="T_c729b_row0_col1" class="data row0 col1" >0.9922</td>
-                        <td id="T_c729b_row0_col2" class="data row0 col2" >0.9994</td>
+                        <th id="T_6e297_level0_row0" class="row_heading level0 row0" >Custom</th>
+                        <td id="T_6e297_row0_col0" class="data row0 col0" >0.9938</td>
+                        <td id="T_6e297_row0_col1" class="data row0 col1" >0.9922</td>
+                        <td id="T_6e297_row0_col2" class="data row0 col2" >0.9994</td>
             </tr>
             <tr>
-                        <th id="T_c729b_level0_row1" class="row_heading level0 row1" >MobileNetV2</th>
-                        <td id="T_c729b_row1_col0" class="data row1 col0" >0.9963</td>
-                        <td id="T_c729b_row1_col1" class="data row1 col1" >0.9954</td>
-                        <td id="T_c729b_row1_col2" class="data row1 col2" >0.9999</td>
+                        <th id="T_6e297_level0_row1" class="row_heading level0 row1" >MobileNetV2</th>
+                        <td id="T_6e297_row1_col0" class="data row1 col0" >0.9963</td>
+                        <td id="T_6e297_row1_col1" class="data row1 col1" >0.9954</td>
+                        <td id="T_6e297_row1_col2" class="data row1 col2" >0.9999</td>
             </tr>
             <tr>
-                        <th id="T_c729b_level0_row2" class="row_heading level0 row2" >Hsieh</th>
-                        <td id="T_c729b_row2_col0" class="data row2 col0" >0.9956</td>
-                        <td id="T_c729b_row2_col1" class="data row2 col1" >0.9945</td>
-                        <td id="T_c729b_row2_col2" class="data row2 col2" >0.9998</td>
+                        <th id="T_6e297_level0_row2" class="row_heading level0 row2" >Hsieh</th>
+                        <td id="T_6e297_row2_col0" class="data row2 col0" >0.9956</td>
+                        <td id="T_6e297_row2_col1" class="data row2 col1" >0.9945</td>
+                        <td id="T_6e297_row2_col2" class="data row2 col2" >0.9998</td>
             </tr>
     </tbody></table></div>
 
