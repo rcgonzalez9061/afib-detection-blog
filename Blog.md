@@ -6,9 +6,9 @@ permalink: /
 
 # Detecting Atrial Fibrilation with 1-D CNNs
 
-So I recently bought an Apple Watch. It was on sale for a pretty good deal and I’ve been wanting one for quite a while, so I just had to get it. Like I normally do with all of my recently purchased gadgets, I played around with it in the middle of the night to figure out all of its features. This led to me discovering the ECG feature which intrigued me, so I set out to recreate a similar system to detect Atrial Fibrillation (AFib) like Apple’s implementation does. 
+So I recently bought an Apple Watch. It was on sale for a pretty good deal and I've been wanting one for quite a while, so I just had to get it. Like I normally do with all of my recently purchased gadgets, I played around with it in the middle of the night to figure out all of its features. This led to me discovering the ECG feature which intrigued me, so I set out to recreate a similar system to detect Atrial Fibrillation (AFib) like Apple's implementation does. 
 
-The thing is, I had no prior experience with ECGs. Most of what I know is focused around computers, so the biomedical domain isn’t really my specialty. However, I thought this project would serve as a good exploration into the domain.
+The thing is, I had no prior experience with ECGs. Most of what I know is focused around computers, so the biomedical domain isn't really my specialty. However, I thought this project would serve as a good exploration into the domain.
 
 **TLDR;** I got an Apple Watch. It can do ECGs. I wanted to replicate that and learn more about ECGs.
 
@@ -27,42 +27,42 @@ The first thing I had to do was to source a good ECG dataset. Luckily, I quickly
 
 
 <div id='#data-overview'><style  type="text/css" >
-</style><table id="T_44d94_" ><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Total Duration<br>(Minutes)</th>        <th class="col_heading level0 col1" >Total<br>Duration (%)</th>        <th class="col_heading level0 col2" >Unique<br>Occasions</th>        <th class="col_heading level0 col3" >Min<br>Duration</th>        <th class="col_heading level0 col4" >Avg Duration<br>(Samples)</th>        <th class="col_heading level0 col5" >Long Samples<br>(>30s)</th>    </tr>    <tr>        <th class="index_name level0" >Label</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+</style><table id="T_ccb7b_" ><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Total Duration<br>(Minutes)</th>        <th class="col_heading level0 col1" >Total<br>Duration (%)</th>        <th class="col_heading level0 col2" >Unique<br>Occasions</th>        <th class="col_heading level0 col3" >Min<br>Duration</th>        <th class="col_heading level0 col4" >Avg Duration<br>(Samples)</th>        <th class="col_heading level0 col5" >Long Samples<br>(>30s)</th>    </tr>    <tr>        <th class="index_name level0" >Label</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_44d94_level0_row0" class="row_heading level0 row0" >AFIB</th>
-                        <td id="T_44d94_row0_col0" class="data row0 col0" >5,603.85</td>
-                        <td id="T_44d94_row0_col1" class="data row0 col1" >39.87%</td>
-                        <td id="T_44d94_row0_col2" class="data row0 col2" >291</td>
-                        <td id="T_44d94_row0_col3" class="data row0 col3" >420</td>
-                        <td id="T_44d94_row0_col4" class="data row0 col4" >288,858</td>
-                        <td id="T_44d94_row0_col5" class="data row0 col5" >226</td>
+                        <th id="T_ccb7b_level0_row0" class="row_heading level0 row0" >AFIB</th>
+                        <td id="T_ccb7b_row0_col0" class="data row0 col0" >5,603.85</td>
+                        <td id="T_ccb7b_row0_col1" class="data row0 col1" >39.87%</td>
+                        <td id="T_ccb7b_row0_col2" class="data row0 col2" >291</td>
+                        <td id="T_ccb7b_row0_col3" class="data row0 col3" >420</td>
+                        <td id="T_ccb7b_row0_col4" class="data row0 col4" >288,858</td>
+                        <td id="T_ccb7b_row0_col5" class="data row0 col5" >226</td>
             </tr>
             <tr>
-                        <th id="T_44d94_level0_row1" class="row_heading level0 row1" >AFL</th>
-                        <td id="T_44d94_row1_col0" class="data row1 col0" >97.95</td>
-                        <td id="T_44d94_row1_col1" class="data row1 col1" >0.70%</td>
-                        <td id="T_44d94_row1_col2" class="data row1 col2" >14</td>
-                        <td id="T_44d94_row1_col3" class="data row1 col3" >882</td>
-                        <td id="T_44d94_row1_col4" class="data row1 col4" >104,947</td>
-                        <td id="T_44d94_row1_col5" class="data row1 col5" >7</td>
+                        <th id="T_ccb7b_level0_row1" class="row_heading level0 row1" >AFL</th>
+                        <td id="T_ccb7b_row1_col0" class="data row1 col0" >97.95</td>
+                        <td id="T_ccb7b_row1_col1" class="data row1 col1" >0.70%</td>
+                        <td id="T_ccb7b_row1_col2" class="data row1 col2" >14</td>
+                        <td id="T_ccb7b_row1_col3" class="data row1 col3" >882</td>
+                        <td id="T_ccb7b_row1_col4" class="data row1 col4" >104,947</td>
+                        <td id="T_ccb7b_row1_col5" class="data row1 col5" >7</td>
             </tr>
             <tr>
-                        <th id="T_44d94_level0_row2" class="row_heading level0 row2" >J</th>
-                        <td id="T_44d94_row2_col0" class="data row2 col0" >5.52</td>
-                        <td id="T_44d94_row2_col1" class="data row2 col1" >0.04%</td>
-                        <td id="T_44d94_row2_col2" class="data row2 col2" >12</td>
-                        <td id="T_44d94_row2_col3" class="data row2 col3" >380</td>
-                        <td id="T_44d94_row2_col4" class="data row2 col4" >6,894</td>
-                        <td id="T_44d94_row2_col5" class="data row2 col5" >3</td>
+                        <th id="T_ccb7b_level0_row2" class="row_heading level0 row2" >J</th>
+                        <td id="T_ccb7b_row2_col0" class="data row2 col0" >5.52</td>
+                        <td id="T_ccb7b_row2_col1" class="data row2 col1" >0.04%</td>
+                        <td id="T_ccb7b_row2_col2" class="data row2 col2" >12</td>
+                        <td id="T_ccb7b_row2_col3" class="data row2 col3" >380</td>
+                        <td id="T_ccb7b_row2_col4" class="data row2 col4" >6,894</td>
+                        <td id="T_ccb7b_row2_col5" class="data row2 col5" >3</td>
             </tr>
             <tr>
-                        <th id="T_44d94_level0_row3" class="row_heading level0 row3" >N</th>
-                        <td id="T_44d94_row3_col0" class="data row3 col0" >8,349.30</td>
-                        <td id="T_44d94_row3_col1" class="data row3 col1" >59.40%</td>
-                        <td id="T_44d94_row3_col2" class="data row3 col2" >288</td>
-                        <td id="T_44d94_row3_col3" class="data row3 col3" >1062</td>
-                        <td id="T_44d94_row3_col4" class="data row3 col4" >434,859</td>
-                        <td id="T_44d94_row3_col5" class="data row3 col5" >263</td>
+                        <th id="T_ccb7b_level0_row3" class="row_heading level0 row3" >N</th>
+                        <td id="T_ccb7b_row3_col0" class="data row3 col0" >8,349.30</td>
+                        <td id="T_ccb7b_row3_col1" class="data row3 col1" >59.40%</td>
+                        <td id="T_ccb7b_row3_col2" class="data row3 col2" >288</td>
+                        <td id="T_ccb7b_row3_col3" class="data row3 col3" >1062</td>
+                        <td id="T_ccb7b_row3_col4" class="data row3 col4" >434,859</td>
+                        <td id="T_ccb7b_row3_col5" class="data row3 col5" >263</td>
             </tr>
     </tbody></table></div>
 
@@ -70,7 +70,7 @@ Again, I am going into this project with little to no background knowledge on ho
 
 ## Time Domain Analysis
 
-FFirst, I've curated a small random sample that has decent variation which I have plotted below for a quick visual comparison. While I don’t really notice any obvious differences between the different rhythms, I did notice that they see to follow the same pattern of having some sort of lead-up activity, a giant spike in activity and then some follow-up activity. This is extremely prevalent in record 08455.
+FFirst, I've curated a small random sample that has decent variation which I have plotted below for a quick visual comparison. While I don't really notice any obvious differences between the different rhythms, I did notice that they see to follow the same pattern of having some sort of lead-up activity, a giant spike in activity and then some follow-up activity. This is extremely prevalent in record 08455.
 
 {% include 1x4.png %}
 
@@ -123,7 +123,7 @@ One final explanation might be more clear if we reference the previous frequency
 
 ## Detection Models
 
-Now, my main goal: Creating machine learning models to detect AFib. I actually had a lot of trouble with this initially. I thought that by having such a large dataset, I could just generate random samples during training and validation. However, this system yielded unreliable results, no matter the sample sizes I used. After struggling for a while, I referred to [Detection of Atrial Fibrillation Using 1D Convolutional Neural Network (Hsieh, 2020)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7180882/) for some guidance which lead to my final data loading system. After making these changes, I immediately saw better results. Here’s the details:
+Now, my main goal: Creating machine learning models to detect AFib. I actually had a lot of trouble with this initially. I thought that by having such a large dataset, I could just generate random samples during training and validation. However, this system yielded unreliable results, no matter the sample sizes I used. After struggling for a while, I referred to [Detection of Atrial Fibrillation Using 1D Convolutional Neural Network (Hsieh, 2020)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7180882/) for some guidance which lead to my final data loading system. After making these changes, I immediately saw better results. Here's the details:
 
 ### ETL Pipeline
 
@@ -153,42 +153,42 @@ Lastly, I grouped each fold by architecture into ensembles by averaging their ou
 
 
 <div id='ind-model-perf'><style  type="text/css" >
-</style><table id="T_69af8_" ><caption>Individual Model Performance</caption><thead>    <tr>        <th class="index_name level0" >Model</th>        <th class="col_heading level0 col0" colspan="3">Custom</th>        <th class="col_heading level0 col3" colspan="3">Hsieh</th>        <th class="col_heading level0 col6" colspan="3">MobileNetV2</th>    </tr>    <tr>        <th class="blank level1" ></th>        <th class="col_heading level1 col0" >AUC</th>        <th class="col_heading level1 col1" >Accuracy</th>        <th class="col_heading level1 col2" >F1 Score</th>        <th class="col_heading level1 col3" >AUC</th>        <th class="col_heading level1 col4" >Accuracy</th>        <th class="col_heading level1 col5" >F1 Score</th>        <th class="col_heading level1 col6" >AUC</th>        <th class="col_heading level1 col7" >Accuracy</th>        <th class="col_heading level1 col8" >F1 Score</th>    </tr>    <tr>        <th class="index_name level0" >Fold</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+</style><table id="T_5258d_" ><caption>Individual Model Performance</caption><thead>    <tr>        <th class="index_name level0" >Model</th>        <th class="col_heading level0 col0" colspan="3">Custom</th>        <th class="col_heading level0 col3" colspan="3">Hsieh</th>        <th class="col_heading level0 col6" colspan="3">MobileNetV2</th>    </tr>    <tr>        <th class="blank level1" ></th>        <th class="col_heading level1 col0" >AUC</th>        <th class="col_heading level1 col1" >Accuracy</th>        <th class="col_heading level1 col2" >F1 Score</th>        <th class="col_heading level1 col3" >AUC</th>        <th class="col_heading level1 col4" >Accuracy</th>        <th class="col_heading level1 col5" >F1 Score</th>        <th class="col_heading level1 col6" >AUC</th>        <th class="col_heading level1 col7" >Accuracy</th>        <th class="col_heading level1 col8" >F1 Score</th>    </tr>    <tr>        <th class="index_name level0" >Fold</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_69af8_level0_row0" class="row_heading level0 row0" >1</th>
-                        <td id="T_69af8_row0_col0" class="data row0 col0" >0.9981</td>
-                        <td id="T_69af8_row0_col1" class="data row0 col1" >0.9884</td>
-                        <td id="T_69af8_row0_col2" class="data row0 col2" >0.9855</td>
-                        <td id="T_69af8_row0_col3" class="data row0 col3" >0.9993</td>
-                        <td id="T_69af8_row0_col4" class="data row0 col4" >0.9929</td>
-                        <td id="T_69af8_row0_col5" class="data row0 col5" >0.9911</td>
-                        <td id="T_69af8_row0_col6" class="data row0 col6" >0.9994</td>
-                        <td id="T_69af8_row0_col7" class="data row0 col7" >0.9925</td>
-                        <td id="T_69af8_row0_col8" class="data row0 col8" >0.9907</td>
+                        <th id="T_5258d_level0_row0" class="row_heading level0 row0" >1</th>
+                        <td id="T_5258d_row0_col0" class="data row0 col0" >0.9981</td>
+                        <td id="T_5258d_row0_col1" class="data row0 col1" >0.9884</td>
+                        <td id="T_5258d_row0_col2" class="data row0 col2" >0.9855</td>
+                        <td id="T_5258d_row0_col3" class="data row0 col3" >0.9993</td>
+                        <td id="T_5258d_row0_col4" class="data row0 col4" >0.9929</td>
+                        <td id="T_5258d_row0_col5" class="data row0 col5" >0.9911</td>
+                        <td id="T_5258d_row0_col6" class="data row0 col6" >0.9994</td>
+                        <td id="T_5258d_row0_col7" class="data row0 col7" >0.9925</td>
+                        <td id="T_5258d_row0_col8" class="data row0 col8" >0.9907</td>
             </tr>
             <tr>
-                        <th id="T_69af8_level0_row1" class="row_heading level0 row1" >2</th>
-                        <td id="T_69af8_row1_col0" class="data row1 col0" >0.9995</td>
-                        <td id="T_69af8_row1_col1" class="data row1 col1" >0.9940</td>
-                        <td id="T_69af8_row1_col2" class="data row1 col2" >0.9925</td>
-                        <td id="T_69af8_row1_col3" class="data row1 col3" >0.9995</td>
-                        <td id="T_69af8_row1_col4" class="data row1 col4" >0.9943</td>
-                        <td id="T_69af8_row1_col5" class="data row1 col5" >0.9928</td>
-                        <td id="T_69af8_row1_col6" class="data row1 col6" >0.9994</td>
-                        <td id="T_69af8_row1_col7" class="data row1 col7" >0.9938</td>
-                        <td id="T_69af8_row1_col8" class="data row1 col8" >0.9922</td>
+                        <th id="T_5258d_level0_row1" class="row_heading level0 row1" >2</th>
+                        <td id="T_5258d_row1_col0" class="data row1 col0" >0.9995</td>
+                        <td id="T_5258d_row1_col1" class="data row1 col1" >0.9940</td>
+                        <td id="T_5258d_row1_col2" class="data row1 col2" >0.9925</td>
+                        <td id="T_5258d_row1_col3" class="data row1 col3" >0.9995</td>
+                        <td id="T_5258d_row1_col4" class="data row1 col4" >0.9943</td>
+                        <td id="T_5258d_row1_col5" class="data row1 col5" >0.9928</td>
+                        <td id="T_5258d_row1_col6" class="data row1 col6" >0.9994</td>
+                        <td id="T_5258d_row1_col7" class="data row1 col7" >0.9938</td>
+                        <td id="T_5258d_row1_col8" class="data row1 col8" >0.9922</td>
             </tr>
             <tr>
-                        <th id="T_69af8_level0_row2" class="row_heading level0 row2" >3</th>
-                        <td id="T_69af8_row2_col0" class="data row2 col0" >0.9997</td>
-                        <td id="T_69af8_row2_col1" class="data row2 col1" >0.9951</td>
-                        <td id="T_69af8_row2_col2" class="data row2 col2" >0.9939</td>
-                        <td id="T_69af8_row2_col3" class="data row2 col3" >0.9992</td>
-                        <td id="T_69af8_row2_col4" class="data row2 col4" >0.9857</td>
-                        <td id="T_69af8_row2_col5" class="data row2 col5" >0.9823</td>
-                        <td id="T_69af8_row2_col6" class="data row2 col6" >0.9996</td>
-                        <td id="T_69af8_row2_col7" class="data row2 col7" >0.9850</td>
-                        <td id="T_69af8_row2_col8" class="data row2 col8" >0.9815</td>
+                        <th id="T_5258d_level0_row2" class="row_heading level0 row2" >3</th>
+                        <td id="T_5258d_row2_col0" class="data row2 col0" >0.9997</td>
+                        <td id="T_5258d_row2_col1" class="data row2 col1" >0.9951</td>
+                        <td id="T_5258d_row2_col2" class="data row2 col2" >0.9939</td>
+                        <td id="T_5258d_row2_col3" class="data row2 col3" >0.9992</td>
+                        <td id="T_5258d_row2_col4" class="data row2 col4" >0.9857</td>
+                        <td id="T_5258d_row2_col5" class="data row2 col5" >0.9823</td>
+                        <td id="T_5258d_row2_col6" class="data row2 col6" >0.9996</td>
+                        <td id="T_5258d_row2_col7" class="data row2 col7" >0.9850</td>
+                        <td id="T_5258d_row2_col8" class="data row2 col8" >0.9815</td>
             </tr>
     </tbody></table></div>
 
@@ -205,44 +205,44 @@ Lastly, I grouped each fold by architecture into ensembles by averaging their ou
 
 <div id='perf-table-wrap'>
     <style  type="text/css" >
-</style><table id="T_69afe_" style='margin:10px !important;'><caption>Averaged Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+</style><table id="T_657cf_" style='margin:10px !important;'><caption>Averaged Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_69afe_level0_row0" class="row_heading level0 row0" >Custom</th>
-                        <td id="T_69afe_row0_col0" class="data row0 col0" >0.9925</td>
-                        <td id="T_69afe_row0_col1" class="data row0 col1" >0.9907</td>
-                        <td id="T_69afe_row0_col2" class="data row0 col2" >0.9991</td>
+                        <th id="T_657cf_level0_row0" class="row_heading level0 row0" >Custom</th>
+                        <td id="T_657cf_row0_col0" class="data row0 col0" >0.9925</td>
+                        <td id="T_657cf_row0_col1" class="data row0 col1" >0.9907</td>
+                        <td id="T_657cf_row0_col2" class="data row0 col2" >0.9991</td>
             </tr>
             <tr>
-                        <th id="T_69afe_level0_row1" class="row_heading level0 row1" >Hsieh</th>
-                        <td id="T_69afe_row1_col0" class="data row1 col0" >0.9910</td>
-                        <td id="T_69afe_row1_col1" class="data row1 col1" >0.9888</td>
-                        <td id="T_69afe_row1_col2" class="data row1 col2" >0.9993</td>
+                        <th id="T_657cf_level0_row1" class="row_heading level0 row1" >Hsieh</th>
+                        <td id="T_657cf_row1_col0" class="data row1 col0" >0.9910</td>
+                        <td id="T_657cf_row1_col1" class="data row1 col1" >0.9888</td>
+                        <td id="T_657cf_row1_col2" class="data row1 col2" >0.9993</td>
             </tr>
             <tr>
-                        <th id="T_69afe_level0_row2" class="row_heading level0 row2" >MobileNetV2</th>
-                        <td id="T_69afe_row2_col0" class="data row2 col0" >0.9904</td>
-                        <td id="T_69afe_row2_col1" class="data row2 col1" >0.9881</td>
-                        <td id="T_69afe_row2_col2" class="data row2 col2" >0.9994</td>
+                        <th id="T_657cf_level0_row2" class="row_heading level0 row2" >MobileNetV2</th>
+                        <td id="T_657cf_row2_col0" class="data row2 col0" >0.9904</td>
+                        <td id="T_657cf_row2_col1" class="data row2 col1" >0.9881</td>
+                        <td id="T_657cf_row2_col2" class="data row2 col2" >0.9994</td>
             </tr>
     </tbody></table><style  type="text/css" >
-</style><table id="T_49b88_" style='margin:10px; !important;'><caption>Averaged Ensemble Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+</style><table id="T_d1ef3_" style='margin:10px; !important;'><caption>Averaged Ensemble Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_49b88_level0_row0" class="row_heading level0 row0" >Custom</th>
-                        <td id="T_49b88_row0_col0" class="data row0 col0" >0.9938</td>
-                        <td id="T_49b88_row0_col1" class="data row0 col1" >0.9922</td>
-                        <td id="T_49b88_row0_col2" class="data row0 col2" >0.9994</td>
+                        <th id="T_d1ef3_level0_row0" class="row_heading level0 row0" >Custom</th>
+                        <td id="T_d1ef3_row0_col0" class="data row0 col0" >0.9938</td>
+                        <td id="T_d1ef3_row0_col1" class="data row0 col1" >0.9922</td>
+                        <td id="T_d1ef3_row0_col2" class="data row0 col2" >0.9994</td>
             </tr>
             <tr>
-                        <th id="T_49b88_level0_row1" class="row_heading level0 row1" >MobileNetV2</th>
-                        <td id="T_49b88_row1_col0" class="data row1 col0" >0.9963</td>
-                        <td id="T_49b88_row1_col1" class="data row1 col1" >0.9954</td>
-                        <td id="T_49b88_row1_col2" class="data row1 col2" >0.9999</td>
+                        <th id="T_d1ef3_level0_row1" class="row_heading level0 row1" >MobileNetV2</th>
+                        <td id="T_d1ef3_row1_col0" class="data row1 col0" >0.9963</td>
+                        <td id="T_d1ef3_row1_col1" class="data row1 col1" >0.9954</td>
+                        <td id="T_d1ef3_row1_col2" class="data row1 col2" >0.9999</td>
             </tr>
             <tr>
-                        <th id="T_49b88_level0_row2" class="row_heading level0 row2" >Hsieh</th>
-                        <td id="T_49b88_row2_col0" class="data row2 col0" >0.9956</td>
-                        <td id="T_49b88_row2_col1" class="data row2 col1" >0.9945</td>
-                        <td id="T_49b88_row2_col2" class="data row2 col2" >0.9998</td>
+                        <th id="T_d1ef3_level0_row2" class="row_heading level0 row2" >Hsieh</th>
+                        <td id="T_d1ef3_row2_col0" class="data row2 col0" >0.9956</td>
+                        <td id="T_d1ef3_row2_col1" class="data row2 col1" >0.9945</td>
+                        <td id="T_d1ef3_row2_col2" class="data row2 col2" >0.9998</td>
             </tr>
     </tbody></table></div>
 
