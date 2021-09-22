@@ -1,0 +1,1 @@
+jupyter nbconvert Blog.ipynb --to html --no-input --execute
