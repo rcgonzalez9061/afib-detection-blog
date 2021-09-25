@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Blog</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Afib Detection</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -13978,18 +13978,18 @@ a.anchor-link {
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>So I recently bought an Apple Watch. It was on sale for a pretty good deal and I've been wanting one for quite a while, so I just had to get it. Like I normally do with all of my recently purchased gadgets, I played around with it in the middle of the night to figure out all of its features. This led to me discovering the ECG feature which intrigued me, so I set out to recreate a similar system to detect Atrial Fibrillation (AFib) like Apple's implementation does.</p>
-<p>The thing is, I had no prior experience with ECGs. Most of what I know is focused around computers, so the biomedical domain isn't really my specialty. However, I thought this project would serve as a good exploration into the domain.</p>
-<p><strong>TLDR;</strong> I got an Apple Watch. It can do ECGs. I wanted to replicate that and learn more about ECGs.</p>
+<p>Atrial Fibrilation (AFib) is a condition where the heart’s atria beat irratically, out of sync with the rest of the heart. This results in the reduced effectiveness of the heart and it is associated with more severe heart conditions like stroke or heart failure (<a href="https://www.heart.org/en/health-topics/atrial-fibrillation/what-is-atrial-fibrillation-afib-or-af">heart.org</a>). Due to this, there has been much effort directed toward developing better ways for detecting AFib early. In the new age of wearable technology like the Apple Watch, <a href="https://www.apple.com/healthcare/docs/site/Apple_Watch_Arrhythmia_Detection.pdf">passive machine learning-based methods for detection have become common place</a>. In this project, I wanted to explore how electrocardiograms (ECGs) inform us of episodes of AFIB and determine if 1-D convolutional neural networks are adequate for detecting AFib.</p>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Data">Data<a class="anchor-link" href="#Data">&#182;</a></h2>
+<h3 id="Some-Quick-Background...">Some Quick Background...<a class="anchor-link" href="#Some-Quick-Background...">&#182;</a></h3><p>I recently bought an Apple Watch. It was on sale for a pretty good deal and I've been wanting one for quite a while. This led to me discovering its ECG AFib detection capabilities, so I set out to try recreate a similar system with this project. While it's not going to be as thorough as Apple's research, I'm went with what was realistically capable with my resources, time, and prior knowledge. The biomedical domain isn't really my specialty and I have no prior experience working with ECGs. However, this project has served as some decent practice and a fruitful exploration into the biomedical domain.</p>
+
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The first thing I had to do was to source a good ECG dataset. Luckily, I quickly found the <a href="https://physionet.org/content/afdb/1.0.0/">MIT-BIH Atrial Fibrillation Database</a>. It contains annotated ECG data from 23 unique patients each with two simultaneous 10 hour ECG signals. The annotations detailing the rythym at a given time are given in a record's <code>.atr</code> files. There are 4 different types of annotations for hearth rythyms: Atrial Fibrilation (AFIB), Atrial Flutter (AFL), AV Junction (J), and "all other rythyms" (N). The dataset mostly captures AFIB and N rythyms while AFL and J only make up around 1% of the data.</p>
+<hr>
+<h2 id="Data">Data<a class="anchor-link" href="#Data">&#182;</a></h2><p>The first thing I had to do was to source a good ECG dataset. Luckily, I quickly found the <a href="https://physionet.org/content/afdb/1.0.0/">MIT-BIH Atrial Fibrillation Database</a>. It contains annotated ECG data from 23 unique patients each with two simultaneous 10-hour ECG signals. The annotations denote when an episode of a rythym begins for a record of which there are 4 different labels available: Atrial Fibrilation (AFIB), Atrial Flutter (AFL), AV Junction (J), and "all other rythyms" (N). The dataset mostly captures AFIB and N rythyms while AFL and J only make up less than 1% of the data.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
@@ -14025,42 +14025,42 @@ a.anchor-link {
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <div id='data-overview'><style  type="text/css" >
-</style><table id="T_c1711_" ><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Total Duration<br>(Minutes)</th>        <th class="col_heading level0 col1" >Total<br>Duration (%)</th>        <th class="col_heading level0 col2" >Unique<br>Occasions</th>        <th class="col_heading level0 col3" >Min<br>Duration</th>        <th class="col_heading level0 col4" >Avg Duration<br>(Samples)</th>        <th class="col_heading level0 col5" >Long Samples<br>(>30s)</th>    </tr>    <tr>        <th class="index_name level0" >Label</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+</style><table id="T_ccfb0_" ><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Total Duration<br>(Minutes)</th>        <th class="col_heading level0 col1" >Total<br>Duration (%)</th>        <th class="col_heading level0 col2" >Avg Duration<br>(Samples)</th>        <th class="col_heading level0 col3" >Min<br>Duration</th>        <th class="col_heading level0 col4" >Unique<br>Episodes</th>        <th class="col_heading level0 col5" >Episodes<br>(>30s)</th>    </tr>    <tr>        <th class="index_name level0" >Label</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_c1711_level0_row0" class="row_heading level0 row0" >AFIB</th>
-                        <td id="T_c1711_row0_col0" class="data row0 col0" >5,603.85</td>
-                        <td id="T_c1711_row0_col1" class="data row0 col1" >39.87%</td>
-                        <td id="T_c1711_row0_col2" class="data row0 col2" >291</td>
-                        <td id="T_c1711_row0_col3" class="data row0 col3" >420</td>
-                        <td id="T_c1711_row0_col4" class="data row0 col4" >288,858</td>
-                        <td id="T_c1711_row0_col5" class="data row0 col5" >226</td>
+                        <th id="T_ccfb0_level0_row0" class="row_heading level0 row0" >AFIB</th>
+                        <td id="T_ccfb0_row0_col0" class="data row0 col0" >5,603.85</td>
+                        <td id="T_ccfb0_row0_col1" class="data row0 col1" >39.87%</td>
+                        <td id="T_ccfb0_row0_col2" class="data row0 col2" >288,858</td>
+                        <td id="T_ccfb0_row0_col3" class="data row0 col3" >420</td>
+                        <td id="T_ccfb0_row0_col4" class="data row0 col4" >291</td>
+                        <td id="T_ccfb0_row0_col5" class="data row0 col5" >226</td>
             </tr>
             <tr>
-                        <th id="T_c1711_level0_row1" class="row_heading level0 row1" >AFL</th>
-                        <td id="T_c1711_row1_col0" class="data row1 col0" >97.95</td>
-                        <td id="T_c1711_row1_col1" class="data row1 col1" >0.70%</td>
-                        <td id="T_c1711_row1_col2" class="data row1 col2" >14</td>
-                        <td id="T_c1711_row1_col3" class="data row1 col3" >882</td>
-                        <td id="T_c1711_row1_col4" class="data row1 col4" >104,947</td>
-                        <td id="T_c1711_row1_col5" class="data row1 col5" >7</td>
+                        <th id="T_ccfb0_level0_row1" class="row_heading level0 row1" >AFL</th>
+                        <td id="T_ccfb0_row1_col0" class="data row1 col0" >97.95</td>
+                        <td id="T_ccfb0_row1_col1" class="data row1 col1" >0.70%</td>
+                        <td id="T_ccfb0_row1_col2" class="data row1 col2" >104,947</td>
+                        <td id="T_ccfb0_row1_col3" class="data row1 col3" >882</td>
+                        <td id="T_ccfb0_row1_col4" class="data row1 col4" >14</td>
+                        <td id="T_ccfb0_row1_col5" class="data row1 col5" >7</td>
             </tr>
             <tr>
-                        <th id="T_c1711_level0_row2" class="row_heading level0 row2" >J</th>
-                        <td id="T_c1711_row2_col0" class="data row2 col0" >5.52</td>
-                        <td id="T_c1711_row2_col1" class="data row2 col1" >0.04%</td>
-                        <td id="T_c1711_row2_col2" class="data row2 col2" >12</td>
-                        <td id="T_c1711_row2_col3" class="data row2 col3" >380</td>
-                        <td id="T_c1711_row2_col4" class="data row2 col4" >6,894</td>
-                        <td id="T_c1711_row2_col5" class="data row2 col5" >3</td>
+                        <th id="T_ccfb0_level0_row2" class="row_heading level0 row2" >J</th>
+                        <td id="T_ccfb0_row2_col0" class="data row2 col0" >5.52</td>
+                        <td id="T_ccfb0_row2_col1" class="data row2 col1" >0.04%</td>
+                        <td id="T_ccfb0_row2_col2" class="data row2 col2" >6,894</td>
+                        <td id="T_ccfb0_row2_col3" class="data row2 col3" >380</td>
+                        <td id="T_ccfb0_row2_col4" class="data row2 col4" >12</td>
+                        <td id="T_ccfb0_row2_col5" class="data row2 col5" >3</td>
             </tr>
             <tr>
-                        <th id="T_c1711_level0_row3" class="row_heading level0 row3" >N</th>
-                        <td id="T_c1711_row3_col0" class="data row3 col0" >8,349.30</td>
-                        <td id="T_c1711_row3_col1" class="data row3 col1" >59.40%</td>
-                        <td id="T_c1711_row3_col2" class="data row3 col2" >288</td>
-                        <td id="T_c1711_row3_col3" class="data row3 col3" >1062</td>
-                        <td id="T_c1711_row3_col4" class="data row3 col4" >434,859</td>
-                        <td id="T_c1711_row3_col5" class="data row3 col5" >263</td>
+                        <th id="T_ccfb0_level0_row3" class="row_heading level0 row3" >N</th>
+                        <td id="T_ccfb0_row3_col0" class="data row3 col0" >8,349.30</td>
+                        <td id="T_ccfb0_row3_col1" class="data row3 col1" >59.40%</td>
+                        <td id="T_ccfb0_row3_col2" class="data row3 col2" >434,859</td>
+                        <td id="T_ccfb0_row3_col3" class="data row3 col3" >1062</td>
+                        <td id="T_ccfb0_row3_col4" class="data row3 col4" >288</td>
+                        <td id="T_ccfb0_row3_col5" class="data row3 col5" >263</td>
             </tr>
     </tbody></table></div>
 </div>
@@ -14078,7 +14078,7 @@ a.anchor-link {
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Time-Domain-Analysis">Time Domain Analysis<a class="anchor-link" href="#Time-Domain-Analysis">&#182;</a></h2><p>First, I've curated a small random sample that has decent variation which I have plotted below for a quick visual comparison. While I don't really notice any obvious differences between the different rhythms, I did notice that they see to follow the same pattern of having some sort of lead-up activity, a giant spike in activity and then some follow-up activity. This is extremely prevalent in record 08455.</p>
+<h3 id="Time-Domain-Analysis">Time Domain Analysis<a class="anchor-link" href="#Time-Domain-Analysis">&#182;</a></h3><p>First, I've curated a small random sample that has decent variation which I have plotted below for a quick visual comparison. While I don't really notice any obvious differences between the different rhythms, I did notice that they seem to follow the same pattern of having some sort of lead-up activity, a giant spike in activity and then some follow-up activity. This is most prominent in record 08455.</p>
 
 </div>
 </div>
@@ -14107,12 +14107,13 @@ a.anchor-link {
 </style><figure id='sinus-rhythym-img'>
     <img src="assets/images/SinusRhythmLabels.png">
     <figcaption style='text-align: center'>
-        The structure of a normal heartbeat (Source: <a href='https://en.wikipedia.org/wiki/File:SinusRhythmLabels.svg'>Wikipedia<a>)</figcaption>
+        The structure of a normal heartbeat (Source: <a href='https://en.wikipedia.org/wiki/File:SinusRhythmLabels.svg'>Wikipedia</a>)
+        </figcaption>
 </figure>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Frequency-Domain-Analysis">Frequency Domain Analysis<a class="anchor-link" href="#Frequency-Domain-Analysis">&#182;</a></h2><p>Since nothing really stood out between the different rythms, perhaps another view of the data might prove more informative. Using the same sample, I plotted their Discrete Fourier Transforms and noted some observations below:</p>
+<h3 id="Frequency-Domain-Analysis">Frequency Domain Analysis<a class="anchor-link" href="#Frequency-Domain-Analysis">&#182;</a></h3><p>Since nothing really stood out between the different rythms, perhaps another view of the data might prove more informative. Using the same sample, I plotted their Discrete Fourier Transforms and noted some observations below:</p>
 
 </div>
 </div>
@@ -14140,7 +14141,7 @@ a.anchor-link {
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>† I should be careful when I say "noisy". If you actually look at the signals they derived from, they aren't so noisy per say. However, in the frequency domain, it is hard distinguished harmonic spikes like we see in the other signals.</p>
+<p>† I should be careful when I say "noisy". If you actually look at the signals they derived from, they aren't so noisy per say. However, in the frequency domain, it is harder distinguished harmonic spikes like we see in the other signals.</p>
 
 </div>
 </div>
@@ -14150,7 +14151,7 @@ a.anchor-link {
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Aggregated-FDA">Aggregated FDA<a class="anchor-link" href="#Aggregated-FDA">&#182;</a></h2><p>To do a more general comparison, I took 200 samples for each class, applied a Discrete Fourier Transform, and averaged their values to generate the plot below.</p>
+<h3 id="Aggregated-FDA">Aggregated FDA<a class="anchor-link" href="#Aggregated-FDA">&#182;</a></h3><p>To do a more general comparison, I took 200 samples for each class, applied a Discrete Fourier Transform, and averaged their values to generate the plot below.</p>
 
 </div>
 </div>
@@ -14160,15 +14161,23 @@ a.anchor-link {
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The only real distinction I can make is sharpness in the banding for each rythym. However, I believe this doesn't really inform us much about the characteristics of each class. We can expect banding as the result of the harmonics produced by the beat rythym. The sharpness of this banding is likely a result of the variance in each label. AFL and J will have low variance due to the limited number of samples available for them while AFIB and N have higher variance since they have a larger sample pool. Thus, AFL and J appear "sharper" while AFIB and N are more "fuzzy".</p>
-<p>There is a slight contradiction though. AFIB and N do not follow this pattern. N has slightly more sample availability than AFIB, having about 20% more data available by duration and appearing in more unique occasions that last longer than 5 seconds. Still, AFIB appears to have more variance making it hard to distinguish any clear harmonics. Meanwhile, N has some pretty evident harmonic banding.</p>
+<p>The only real distinction I can make is sharpness in the banding for each rythym. However, I believe this doesn't really inform us much about the characteristics of each class. We can expect banding as the result of the harmonics produced by the beat rythym. How sharp the banding appears could potentially be explained by the variance of the data in each label. AFL and J will have low variance due to their limited data availablity while AFIB and N have higher variance due to having much larger sample pools. Thus, AFL and J appear "sharper" while AFIB and N are more "fuzzy".</p>
+<p>On the other hand, if we compare AFIB and N, they do not follow this pattern. N has slightly more availability than AFIB, having about 20% more data by duration. Therefore, we would expect its plot to appear more varied and with less clear banding. Despite this, its plots appear to have more distinct banding than that of the AFIB signals.</p>
 <p>One explanation could be due to AFIB appearing in 23 records while N only appears in 21. If this is the case, then I theorize that N's appearance in this plot will become more fuzzy as I increase the sample size for each class. I tested this at two other sample sizes. At 1,000, I observed slightly more variance in both N and AFIB, but harmonic banding remained distinguishable in N. At 10,000 there was no noticable difference than that at the 1,000 level. From this experiment, I can't conclusively say that this isn't the case.</p>
 <p>Another explanation could be that AFIB rythyms simply have more variation in BPM resulting in this plot appearing less sharp.</p>
-<p>One final explanation might be more clear if we reference the previous frequency domain plot.  Recall how I noted that the AFIB plots had indistinguishable spikes. This may indicate the AFIB signals are more eratic resulting in their aggregates appearing as they do.</p>
+<p>One final explanation might be more clear if we reference the previous frequency domain plot.  Recall how I noted that the AFIB plots had indistinguishable spikes. This may suggest that the AFIB signals are more eratic resulting in their aggregates appearing as they do.</p>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="A-Closer-Look-at-the-ECG">A Closer Look at the ECG<a class="anchor-link" href="#A-Closer-Look-at-the-ECG">&#182;</a></h2><p>An electrocardiogram (ECG or EKG) captures electrical activity along an electrical axis determined by the placement of the electrodes. When a heart beats, the Sinoatrial Node (SA Node) initiates the beat by generating an action potential. This action potential propagates through the myocardium of the atria forcing them to depolarize and pump blood into the ventricles. This event is recorded on the ECG as the P wave. As the action potential continues, it eventually reaches the Atrioventricular Node (AV Node) which functions to delay the action potential from continuing into the ventricles before they are filled. After this delay, the signal then propagates through the ventricles resulting in the QRS complex. Finally, the T wave is the result of the repolarization of the ventricles. It should be noted that the atria also repolarize but this is obscured by the QRS complex. (<a href="https://www.aclsmedicaltraining.com/basics-of-ecg/">Source</a>)</p>
+<p>While normal beats should look mostly like the example that I have provided (with the  P, Q, R, S, and T waves in order and occurring in regular intervals) they can vary significantly and appear differently depending on the placement of the electrical leads and numerous other factors. This especially goes for the QRS complex which can take on many different forms according to some of my sources.</p>
+<p>During atrial fibrillation, the atria chaotically and rapidly depolarize. However, after activation, the AV Node becomes temporarily unresponsive to further stimulus, so these action potentials do not always reach the ventricles. This results in an ECG that typically lacks a P wave and has an irregular heartbeat. For example, we can observe this in records 08215 and 07910 for the AFib column on the time domain plot.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<hr>
 <h2 id="Detection-Models">Detection Models<a class="anchor-link" href="#Detection-Models">&#182;</a></h2><p>Now, my main goal: Creating machine learning models to detect AFib. I actually had a lot of trouble with this initially. I thought that by having such a large dataset, I could just generate random samples during training and validation. However, this system yielded unreliable results, no matter the sample sizes I used. After struggling for a while, I referred to <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7180882/">Detection of Atrial Fibrillation Using 1D Convolutional Neural Network (Hsieh, 2020)</a> for some guidance which lead to my final data loading system. After making these changes, I immediately saw better results. Here's the details:</p>
 
 </div>
@@ -14193,7 +14202,7 @@ To train a model, I held out one fold for validation and trained on the remainin
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<div class='ind-model-perf'><p style='font-size: 16px; margin: 0;'>Individual Model Performance</p></div>
+<div class='ind-model-perf'><p style='font-size: 16px; margin: 0;'>Cross-validated Performance</p></div>
 </div>
 
 </div>
@@ -14253,42 +14262,42 @@ caption {
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <div class='ind-model-perf'><style  type="text/css" >
-</style><table id="T_4a90f_" ><thead>    <tr>        <th class="index_name level0" >Model</th>        <th class="col_heading level0 col0" colspan="3">Custom</th>        <th class="col_heading level0 col3" colspan="3">Hsieh</th>        <th class="col_heading level0 col6" colspan="3">MobileNetV2</th>    </tr>    <tr>        <th class="blank level1" ></th>        <th class="col_heading level1 col0" >AUC</th>        <th class="col_heading level1 col1" >Accuracy</th>        <th class="col_heading level1 col2" >F1 Score</th>        <th class="col_heading level1 col3" >AUC</th>        <th class="col_heading level1 col4" >Accuracy</th>        <th class="col_heading level1 col5" >F1 Score</th>        <th class="col_heading level1 col6" >AUC</th>        <th class="col_heading level1 col7" >Accuracy</th>        <th class="col_heading level1 col8" >F1 Score</th>    </tr>    <tr>        <th class="index_name level0" >Fold</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+</style><table id="T_d3f10_" ><thead>    <tr>        <th class="index_name level0" >Model</th>        <th class="col_heading level0 col0" colspan="3">Custom</th>        <th class="col_heading level0 col3" colspan="3">Hsieh</th>        <th class="col_heading level0 col6" colspan="3">MobileNetV2</th>    </tr>    <tr>        <th class="blank level1" ></th>        <th class="col_heading level1 col0" >AUC</th>        <th class="col_heading level1 col1" >Accuracy</th>        <th class="col_heading level1 col2" >F1 Score</th>        <th class="col_heading level1 col3" >AUC</th>        <th class="col_heading level1 col4" >Accuracy</th>        <th class="col_heading level1 col5" >F1 Score</th>        <th class="col_heading level1 col6" >AUC</th>        <th class="col_heading level1 col7" >Accuracy</th>        <th class="col_heading level1 col8" >F1 Score</th>    </tr>    <tr>        <th class="index_name level0" >Fold</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_4a90f_level0_row0" class="row_heading level0 row0" >1</th>
-                        <td id="T_4a90f_row0_col0" class="data row0 col0" >0.9981</td>
-                        <td id="T_4a90f_row0_col1" class="data row0 col1" >0.9884</td>
-                        <td id="T_4a90f_row0_col2" class="data row0 col2" >0.9855</td>
-                        <td id="T_4a90f_row0_col3" class="data row0 col3" >0.9993</td>
-                        <td id="T_4a90f_row0_col4" class="data row0 col4" >0.9929</td>
-                        <td id="T_4a90f_row0_col5" class="data row0 col5" >0.9911</td>
-                        <td id="T_4a90f_row0_col6" class="data row0 col6" >0.9994</td>
-                        <td id="T_4a90f_row0_col7" class="data row0 col7" >0.9925</td>
-                        <td id="T_4a90f_row0_col8" class="data row0 col8" >0.9907</td>
+                        <th id="T_d3f10_level0_row0" class="row_heading level0 row0" >1</th>
+                        <td id="T_d3f10_row0_col0" class="data row0 col0" >0.9997</td>
+                        <td id="T_d3f10_row0_col1" class="data row0 col1" >0.9943</td>
+                        <td id="T_d3f10_row0_col2" class="data row0 col2" >0.9929</td>
+                        <td id="T_d3f10_row0_col3" class="data row0 col3" >0.9997</td>
+                        <td id="T_d3f10_row0_col4" class="data row0 col4" >0.9949</td>
+                        <td id="T_d3f10_row0_col5" class="data row0 col5" >0.9937</td>
+                        <td id="T_d3f10_row0_col6" class="data row0 col6" >0.9997</td>
+                        <td id="T_d3f10_row0_col7" class="data row0 col7" >0.9959</td>
+                        <td id="T_d3f10_row0_col8" class="data row0 col8" >0.9949</td>
             </tr>
             <tr>
-                        <th id="T_4a90f_level0_row1" class="row_heading level0 row1" >2</th>
-                        <td id="T_4a90f_row1_col0" class="data row1 col0" >0.9995</td>
-                        <td id="T_4a90f_row1_col1" class="data row1 col1" >0.9940</td>
-                        <td id="T_4a90f_row1_col2" class="data row1 col2" >0.9925</td>
-                        <td id="T_4a90f_row1_col3" class="data row1 col3" >0.9995</td>
-                        <td id="T_4a90f_row1_col4" class="data row1 col4" >0.9943</td>
-                        <td id="T_4a90f_row1_col5" class="data row1 col5" >0.9928</td>
-                        <td id="T_4a90f_row1_col6" class="data row1 col6" >0.9994</td>
-                        <td id="T_4a90f_row1_col7" class="data row1 col7" >0.9938</td>
-                        <td id="T_4a90f_row1_col8" class="data row1 col8" >0.9922</td>
+                        <th id="T_d3f10_level0_row1" class="row_heading level0 row1" >2</th>
+                        <td id="T_d3f10_row1_col0" class="data row1 col0" >0.9993</td>
+                        <td id="T_d3f10_row1_col1" class="data row1 col1" >0.9930</td>
+                        <td id="T_d3f10_row1_col2" class="data row1 col2" >0.9913</td>
+                        <td id="T_d3f10_row1_col3" class="data row1 col3" >0.9997</td>
+                        <td id="T_d3f10_row1_col4" class="data row1 col4" >0.9952</td>
+                        <td id="T_d3f10_row1_col5" class="data row1 col5" >0.9940</td>
+                        <td id="T_d3f10_row1_col6" class="data row1 col6" >0.9997</td>
+                        <td id="T_d3f10_row1_col7" class="data row1 col7" >0.9951</td>
+                        <td id="T_d3f10_row1_col8" class="data row1 col8" >0.9939</td>
             </tr>
             <tr>
-                        <th id="T_4a90f_level0_row2" class="row_heading level0 row2" >3</th>
-                        <td id="T_4a90f_row2_col0" class="data row2 col0" >0.9997</td>
-                        <td id="T_4a90f_row2_col1" class="data row2 col1" >0.9951</td>
-                        <td id="T_4a90f_row2_col2" class="data row2 col2" >0.9939</td>
-                        <td id="T_4a90f_row2_col3" class="data row2 col3" >0.9992</td>
-                        <td id="T_4a90f_row2_col4" class="data row2 col4" >0.9857</td>
-                        <td id="T_4a90f_row2_col5" class="data row2 col5" >0.9823</td>
-                        <td id="T_4a90f_row2_col6" class="data row2 col6" >0.9996</td>
-                        <td id="T_4a90f_row2_col7" class="data row2 col7" >0.9850</td>
-                        <td id="T_4a90f_row2_col8" class="data row2 col8" >0.9815</td>
+                        <th id="T_d3f10_level0_row2" class="row_heading level0 row2" >3</th>
+                        <td id="T_d3f10_row2_col0" class="data row2 col0" >0.9989</td>
+                        <td id="T_d3f10_row2_col1" class="data row2 col1" >0.9904</td>
+                        <td id="T_d3f10_row2_col2" class="data row2 col2" >0.9879</td>
+                        <td id="T_d3f10_row2_col3" class="data row2 col3" >0.9998</td>
+                        <td id="T_d3f10_row2_col4" class="data row2 col4" >0.9943</td>
+                        <td id="T_d3f10_row2_col5" class="data row2 col5" >0.9930</td>
+                        <td id="T_d3f10_row2_col6" class="data row2 col6" >0.9998</td>
+                        <td id="T_d3f10_row2_col7" class="data row2 col7" >0.9927</td>
+                        <td id="T_d3f10_row2_col8" class="data row2 col8" >0.9909</td>
             </tr>
     </tbody></table></div>
 </div>
@@ -14322,44 +14331,44 @@ caption {
 
 <div id='perf-table-wrap'>
     <style  type="text/css" >
-</style><table id="T_2c92f_" style='margin:10px !important;'><caption>Averaged Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+</style><table id="T_e00db_" style='margin:10px !important;'><caption>Averaged Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_2c92f_level0_row0" class="row_heading level0 row0" >Custom</th>
-                        <td id="T_2c92f_row0_col0" class="data row0 col0" >0.9925</td>
-                        <td id="T_2c92f_row0_col1" class="data row0 col1" >0.9907</td>
-                        <td id="T_2c92f_row0_col2" class="data row0 col2" >0.9991</td>
+                        <th id="T_e00db_level0_row0" class="row_heading level0 row0" >Custom</th>
+                        <td id="T_e00db_row0_col0" class="data row0 col0" >0.9925</td>
+                        <td id="T_e00db_row0_col1" class="data row0 col1" >0.9907</td>
+                        <td id="T_e00db_row0_col2" class="data row0 col2" >0.9993</td>
             </tr>
             <tr>
-                        <th id="T_2c92f_level0_row1" class="row_heading level0 row1" >Hsieh</th>
-                        <td id="T_2c92f_row1_col0" class="data row1 col0" >0.9910</td>
-                        <td id="T_2c92f_row1_col1" class="data row1 col1" >0.9888</td>
-                        <td id="T_2c92f_row1_col2" class="data row1 col2" >0.9993</td>
+                        <th id="T_e00db_level0_row1" class="row_heading level0 row1" >Hsieh</th>
+                        <td id="T_e00db_row1_col0" class="data row1 col0" >0.9948</td>
+                        <td id="T_e00db_row1_col1" class="data row1 col1" >0.9936</td>
+                        <td id="T_e00db_row1_col2" class="data row1 col2" >0.9997</td>
             </tr>
             <tr>
-                        <th id="T_2c92f_level0_row2" class="row_heading level0 row2" >MobileNetV2</th>
-                        <td id="T_2c92f_row2_col0" class="data row2 col0" >0.9904</td>
-                        <td id="T_2c92f_row2_col1" class="data row2 col1" >0.9881</td>
-                        <td id="T_2c92f_row2_col2" class="data row2 col2" >0.9994</td>
+                        <th id="T_e00db_level0_row2" class="row_heading level0 row2" >MobileNetV2</th>
+                        <td id="T_e00db_row2_col0" class="data row2 col0" >0.9946</td>
+                        <td id="T_e00db_row2_col1" class="data row2 col1" >0.9932</td>
+                        <td id="T_e00db_row2_col2" class="data row2 col2" >0.9998</td>
             </tr>
     </tbody></table><style  type="text/css" >
-</style><table id="T_f20a4_" style='margin:10px; !important;'><caption>Ensemble Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
+</style><table id="T_77e62_" style='margin:10px; !important;'><caption>Ensemble Performance</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Accuracy</th>        <th class="col_heading level0 col1" >F1 Score</th>        <th class="col_heading level0 col2" >AUC</th>    </tr>    <tr>        <th class="index_name level0" >Model</th>        <th class="blank" ></th>        <th class="blank" ></th>        <th class="blank" ></th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_f20a4_level0_row0" class="row_heading level0 row0" >Custom</th>
-                        <td id="T_f20a4_row0_col0" class="data row0 col0" >0.9938</td>
-                        <td id="T_f20a4_row0_col1" class="data row0 col1" >0.9922</td>
-                        <td id="T_f20a4_row0_col2" class="data row0 col2" >0.9994</td>
+                        <th id="T_77e62_level0_row0" class="row_heading level0 row0" >Custom</th>
+                        <td id="T_77e62_row0_col0" class="data row0 col0" >0.9938</td>
+                        <td id="T_77e62_row0_col1" class="data row0 col1" >0.9922</td>
+                        <td id="T_77e62_row0_col2" class="data row0 col2" >0.9994</td>
             </tr>
             <tr>
-                        <th id="T_f20a4_level0_row1" class="row_heading level0 row1" >MobileNetV2</th>
-                        <td id="T_f20a4_row1_col0" class="data row1 col0" >0.9963</td>
-                        <td id="T_f20a4_row1_col1" class="data row1 col1" >0.9954</td>
-                        <td id="T_f20a4_row1_col2" class="data row1 col2" >0.9999</td>
+                        <th id="T_77e62_level0_row1" class="row_heading level0 row1" >Hsieh</th>
+                        <td id="T_77e62_row1_col0" class="data row1 col0" >0.9956</td>
+                        <td id="T_77e62_row1_col1" class="data row1 col1" >0.9945</td>
+                        <td id="T_77e62_row1_col2" class="data row1 col2" >0.9998</td>
             </tr>
             <tr>
-                        <th id="T_f20a4_level0_row2" class="row_heading level0 row2" >Hsieh</th>
-                        <td id="T_f20a4_row2_col0" class="data row2 col0" >0.9956</td>
-                        <td id="T_f20a4_row2_col1" class="data row2 col1" >0.9945</td>
-                        <td id="T_f20a4_row2_col2" class="data row2 col2" >0.9998</td>
+                        <th id="T_77e62_level0_row2" class="row_heading level0 row2" >MobileNetV2</th>
+                        <td id="T_77e62_row2_col0" class="data row2 col0" >0.9963</td>
+                        <td id="T_77e62_row2_col1" class="data row2 col1" >0.9954</td>
+                        <td id="T_77e62_row2_col2" class="data row2 col2" >0.9999</td>
             </tr>
     </tbody></table></div>
 </div>
@@ -14372,11 +14381,30 @@ caption {
 
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2><p>Coming soon!</p>
+<h2 id="Results-and-Discussion">Results and Discussion<a class="anchor-link" href="#Results-and-Discussion">&#182;</a></h2><p>Overall, All of the CNN’s seemed to be extremely capable at classifying AFib ECGs against N ECGs. After all they were designed with signal classification in mind. We also saw that averaging models outputs was a viable method of aggregating the models into ensembles. I wouldn’t say it necesssarily improves out model performances, but it doesn’t completely break the model either.</p>
+<p>Now, this implementation is likely far from what <a href="https://www.apple.com/healthcare/docs/site/Apple_Watch_Arrhythmia_Detection.pdf">Apple did to approach the problem</a>. Namely, Apple specifically targeted a deployment on a proprietary wearable device. This makes some aspects of this project unrealistic. Apple had various systems in place to deal with noisy data which can be frequently encountered when recording ECGs from a mobile device. Whereas my data was captured in a clinical setting likely with a more reliable data capture method. Furthermore, I would need to consider not just the accuracy of model, but also its size and compute time. I did have this in mind which was one of the reasons why I chose to use Mobilenet as one of the models I tested.</p>
+<p>While I am satified with the performance of the models, I think there may be some methods to achieve better results.</p>
+<ul>
+<li>We could consider performing more transformations on the data before feeding into a model. While the signal has already been band-passed filtered as part of the digitization process, it could potenially benefit from more filtering. For example, to remove the 60 Hz noise we observe in some records.</li>
+<li>We could also add more features like BPM or the variance of the R-R interval</li>
+<li>Could also try to isolate specific waves of the heartbeat, though that would require a more complex model.</li>
+<li>Perhaps doing a frequency domain transformation to generate a spectrogram and using that as the feature to feed into a CNN would also work, but it would undoubtedly add to complexity and therefore size of model. This would put it beyond what I can train with my resources and also make it too large to be usable on a mobile device.</li>
+</ul>
+<p>We could also expand the capabilities of the model by adding other arrythmias as labels. The biggest limit here would be collecting enough data. AFib is one of the most common arrhythmias so it is not too difficult to collect a lot of data for it if targeting it. However episodes of other arrhythmias will occur much more rarely and result in severely imbalanced datasets. Therefore you’d likely need to collect an unconscionable amount of data and implement an unsupervised or semi-supervised method for labeling the data due to its immensity.</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<hr>
 
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Citations">Citations<a class="anchor-link" href="#Citations">&#182;</a></h2><p>Goldberger, A., et al. "PhysioBank, PhysioToolkit, and PhysioNet: Components of a new research resource for complex physiologic signals. Circulation [Online]. 101 (23), pp. e215–e220." (2000).</p>
+<p>Hsieh, Chaur-Heh et al. “Detection of Atrial Fibrillation Using 1D Convolutional Neural Network.” Sensors (Basel, Switzerland) vol. 20,7 2136. 10 Apr. 2020, doi:10.3390/s20072136</p>
+<h2 id="Appendix">Appendix<a class="anchor-link" href="#Appendix">&#182;</a></h2><p><a href="https://github.com/rcgonzalez9061/afib-detector">Source Code</a></p>
+
+</div>
 </div>
 </body>
 

@@ -1,1 +1,1 @@
-jupyter nbconvert Blog.ipynb --to jekyll --no-input --execute
+jupyter nbconvert "Afib Detection.ipynb" --to jekyll --no-input --execute
